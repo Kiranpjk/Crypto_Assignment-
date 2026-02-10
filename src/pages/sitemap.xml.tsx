@@ -3,17 +3,14 @@ import { getMarkets } from '../services/api';
 
 const EXTERNAL_DATA_URL = 'https://your-domain.com'; /* Configure this before deployment */
 
-function generateSiteMap(coins: any[]) {
+function generateSiteMap(coins: { id: string; last_updated: string }[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     <!--We manually set the two URLs we know already-->
+     <!--We manually set the homepage URL-->
      <url>
        <loc>${EXTERNAL_DATA_URL}</loc>
        <changefreq>daily</changefreq>
        <priority>1.0</priority>
-     </url>
-     <url>
-       <loc>${EXTERNAL_DATA_URL}/about</loc>
      </url>
      ${coins
        .map(({ id, last_updated }) => {

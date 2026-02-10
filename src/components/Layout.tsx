@@ -20,7 +20,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </Link>
         <div>
           <Link href="/" style={{ marginRight: '1rem' }}>Market</Link>
-          <a href="#" style={{ color: 'var(--secondary-color)' }}>About</a>
         </div>
       </nav>
       <main className="container" style={{ minHeight: '80vh', padding: '2rem 1rem' }}>

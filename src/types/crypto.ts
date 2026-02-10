@@ -59,8 +59,8 @@ export interface CoinDetail {
         large: string;
     };
     market_data: {
-        current_price: { usd: number };
-        total_value_locked: null | { usd: number };
+        current_price: { inr: number };
+        total_value_locked: null | { inr: number };
         mcap_to_tvl_ratio: null | number;
         fdv_to_tvl_ratio: null | number;
         roi: null | {
@@ -68,12 +68,12 @@ export interface CoinDetail {
             currency: string;
             percentage: number;
         };
-        market_cap: { usd: number };
+        market_cap: { inr: number };
         market_cap_rank: number;
-        fully_diluted_valuation: { usd: number };
-        total_volume: { usd: number };
-        high_24h: { usd: number };
-        low_24h: { usd: number };
+        fully_diluted_valuation: { inr: number };
+        total_volume: { inr: number };
+        high_24h: { inr: number };
+        low_24h: { inr: number };
         price_change_24h: number;
         price_change_percentage_24h: number;
         price_change_percentage_7d: number;
@@ -84,17 +84,17 @@ export interface CoinDetail {
         price_change_percentage_1y: number;
         market_cap_change_24h: number;
         market_cap_change_percentage_24h: number;
-        price_change_24h_in_currency: { usd: number };
-        price_change_percentage_1h_in_currency: { usd: number };
-        price_change_percentage_24h_in_currency: { usd: number };
-        price_change_percentage_7d_in_currency: { usd: number };
-        price_change_percentage_14d_in_currency: { usd: number };
-        price_change_percentage_30d_in_currency: { usd: number };
-        price_change_percentage_60d_in_currency: { usd: number };
-        price_change_percentage_200d_in_currency: { usd: number };
-        price_change_percentage_1y_in_currency: { usd: number };
-        market_cap_change_24h_in_currency: { usd: number };
-        market_cap_change_percentage_24h_in_currency: { usd: number };
+        price_change_24h_in_currency: { inr: number };
+        price_change_percentage_1h_in_currency: { inr: number };
+        price_change_percentage_24h_in_currency: { inr: number };
+        price_change_percentage_7d_in_currency: { inr: number };
+        price_change_percentage_14d_in_currency: { inr: number };
+        price_change_percentage_30d_in_currency: { inr: number };
+        price_change_percentage_60d_in_currency: { inr: number };
+        price_change_percentage_200d_in_currency: { inr: number };
+        price_change_percentage_1y_in_currency: { inr: number };
+        market_cap_change_24h_in_currency: { inr: number };
+        market_cap_change_percentage_24h_in_currency: { inr: number };
         total_supply: number;
         max_supply: number;
         circulating_supply: number;
@@ -131,6 +131,6 @@ export interface CoinDetail {
         alexa_rank: number | null;
         bing_matches: number | null;
     };
-    status_updates: any[];
+    status_updates: unknown[];
     last_updated: string;
 }

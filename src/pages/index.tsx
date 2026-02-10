@@ -14,7 +14,7 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ coins, page }) => {
   const title = `Top Cryptocurrency List - Page ${page} | Market Cap & Prices`;
-  const desc = "Live crypto prices, market cap, and blockchain data. See Bitcoin, Ethereum, Solana, and 100+ coins ranked by market capitalization.";
+  const desc = "Live crypto prices in INR, market cap, and blockchain data. See Bitcoin, Ethereum, Solana, and 100+ coins ranked by market capitalization.";
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -25,7 +25,7 @@ const Home: NextPage<HomeProps> = ({ coins, page }) => {
       "@type": "ListItem",
       "position": (page - 1) * 20 + index + 1,
       "item": {
-        "@type": "Table",
+        "@type": "FinancialProduct",
         "url": `https://your-domain.com/coin/${coin.id}`,
         "name": coin.name,
         "image": coin.image
@@ -44,7 +44,7 @@ const Home: NextPage<HomeProps> = ({ coins, page }) => {
       />
       <div>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem', textAlign: 'center' }}>
-          Real-Time Crypto Market (Page {page})
+          Real-Time Crypto Market
         </h1>
         <p style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--secondary-color)', maxWidth: '800px', margin: '0 auto 3rem auto' }}>
           Explore the top cryptocurrencies by market capitalization. Get live prices, 24h trading volume, and market trends instantly.
@@ -56,18 +56,47 @@ const Home: NextPage<HomeProps> = ({ coins, page }) => {
           ))}
         </section>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '3rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '3rem', flexWrap: 'wrap' }}>
           {page > 1 && (
-            <Link href={`/?page=${page - 1}`} legacyBehavior>
-                <a className="card" style={{ padding: '0.5rem 1.5rem', display: 'inline-block' }}>
-                     ← Previous
-                </a>
+            <Link 
+              href={`/?page=${page - 1}`} 
+              className="card" 
+              style={{ padding: '0.5rem 1rem', display: 'inline-block', textDecoration: 'none', color: 'inherit', minWidth: '40px', textAlign: 'center' }}
+            >
+                 ←
             </Link>
           )}
-          <Link href={`/?page=${page + 1}`} legacyBehavior>
-             <a className="card" style={{ padding: '0.5rem 1.5rem', display: 'inline-block' }}>
-                 Next →
-             </a>
+          
+          {[...Array(5)].map((_, i) => {
+            const pageNum = page > 3 ? page - 2 + i : i + 1;
+            const isCurrentPage = pageNum === page;
+            return (
+              <Link 
+                key={pageNum}
+                href={`/?page=${pageNum}`} 
+                className="card" 
+                style={{ 
+                  padding: '0.5rem 1rem', 
+                  display: 'inline-block', 
+                  textDecoration: 'none', 
+                  color: 'inherit',
+                  minWidth: '40px',
+                  textAlign: 'center',
+                  backgroundColor: isCurrentPage ? 'var(--primary-color)' : 'var(--card-bg)',
+                  fontWeight: isCurrentPage ? 'bold' : 'normal'
+                }}
+              >
+                {pageNum}
+              </Link>
+            );
+          })}
+          
+          <Link 
+             href={`/?page=${page + 1}`} 
+             className="card" 
+             style={{ padding: '0.5rem 1rem', display: 'inline-block', textDecoration: 'none', color: 'inherit', minWidth: '40px', textAlign: 'center' }}
+          >
+             →
           </Link>
         </div>
       </div>

@@ -1,5 +1,6 @@
 
 import { GetServerSideProps, NextPage } from 'next';
+import Image from 'next/image';
 import Layout from '../../components/Layout';
 import Seo from '../../components/Seo';
 import Sparkline from '../../components/Sparkline';
@@ -23,7 +24,7 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
   }
 
   const title = `${coin.name} (${coin.symbol.toUpperCase()}) Price, Chart & Market Cap`;
-  const desc = `Live ${coin.name} price today: $${coin.market_data.current_price.usd.toLocaleString()}. Discover complete data, market cap, trading volume and historical charts for ${coin.name}.`;
+  const desc = `Live ${coin.name} price today: ₹${coin.market_data.current_price.inr.toLocaleString('en-IN')}. Discover complete data, market cap, trading volume and historical charts for ${coin.name}.`;
   
   const priceChangeColor = coin.market_data.price_change_percentage_24h > 0 ? '#4caf50' : '#f44336';
 
@@ -38,8 +39,8 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
     "offers": {
         "@type": "Offer",
         "url": `https://your-domain.com/coin/${coin.id}`,
-        "priceCurrency": "USD",
-        "price": coin.market_data.current_price.usd,
+        "priceCurrency": "INR",
+        "price": coin.market_data.current_price.inr,
         "availability": "https://schema.org/InStock"
     }
   };
@@ -57,12 +58,18 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         {/* Header Section */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <img src={coin.image.large} alt={coin.name} width={80} height={80} />
+            <Image 
+              src={coin.image.large} 
+              alt={coin.name} 
+              width={80} 
+              height={80} 
+              priority
+            />
             <div>
                 <h1 style={{ margin: 0, fontSize: '2.5rem' }}>{coin.name} <span style={{ color: 'var(--secondary-color)', fontSize: '1.5rem' }}>{coin.symbol.toUpperCase()}</span></h1>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', marginTop: '0.5rem' }}>
                     <span style={{ fontSize: '2rem', fontWeight: 'bold' }}>
-                        ${coin.market_data.current_price.usd.toLocaleString()}
+                        ₹{coin.market_data.current_price.inr.toLocaleString('en-IN')}
                     </span>
                     <span style={{ 
                         color: priceChangeColor, 
@@ -98,12 +105,12 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
         <div className="grid">
             <div className="card">
                 <h3>Market Cap</h3>
-                <p className="price">${coin.market_data.market_cap.usd.toLocaleString()}</p>
+                <p className="price">₹{coin.market_data.market_cap.inr.toLocaleString('en-IN')}</p>
                 <small style={{ color: 'var(--secondary-color)' }}>Rank #{coin.market_data.market_cap_rank}</small>
             </div>
             <div className="card">
                 <h3>24h Volume</h3>
-                <p className="price">${coin.market_data.total_volume.usd.toLocaleString()}</p>
+                <p className="price">₹{coin.market_data.total_volume.inr.toLocaleString('en-IN')}</p>
             </div>
             <div className="card">
                 <h3>Circulating Supply</h3>
@@ -111,7 +118,7 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
             </div>
              <div className="card">
                 <h3>All Time High</h3>
-                <p className="price">${coin.market_data.high_24h.usd.toLocaleString()}</p>
+                <p className="price">₹{coin.market_data.high_24h.inr.toLocaleString('en-IN')}</p>
                 {/* Note: high_24h is 24h high, ath is all time high. Using types. */}
             </div>
         </div>

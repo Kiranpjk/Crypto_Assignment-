@@ -4,7 +4,7 @@ const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3';
 
 export const getMarkets = async (perPage = 20, page = 1): Promise<MarketCoin[]> => {
   try {
-    const res = await fetch(`${COINGECKO_API_URL}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h,24h,7d`);
+    const res = await fetch(`${COINGECKO_API_URL}/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h,24h,7d`);
     if (!res.ok) {
         throw new Error('Failed to fetch markets');
     }
