@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { getMarkets } from '../services/api';
+import { SITE_URL } from '../config';
 
-const EXTERNAL_DATA_URL = 'https://your-domain.com'; /* Configure this before deployment */
+const EXTERNAL_DATA_URL = SITE_URL;
 
 function generateSiteMap(coins: { id: string; last_updated: string }[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>

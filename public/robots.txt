@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://your-domain.com/sitemap.xml
+# shortcut: fixed domain because this file is static, change it if the site moves
+Sitemap: https://crypto-assignment-nu.vercel.app/sitemap.xml

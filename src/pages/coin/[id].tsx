@@ -6,6 +6,7 @@ import Seo from '../../components/Seo';
 import Sparkline from '../../components/Sparkline';
 import { getCoinDetail } from '../../services/api';
 import { CoinDetail } from '../../types/crypto';
+import { SITE_URL } from '../../config';
 
 interface CoinPageProps {
   coin: CoinDetail | null;
@@ -38,7 +39,7 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
     "sku": coin.id,
     "offers": {
         "@type": "Offer",
-        "url": `https://your-domain.com/coin/${coin.id}`,
+        "url": `${SITE_URL}/coin/${coin.id}`,
         "priceCurrency": "INR",
         "price": coin.market_data.current_price.inr,
         "availability": "https://schema.org/InStock"
@@ -51,6 +52,7 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
         title={title}
         description={desc}
         ogImage={coin.image.large}
+        canonicalUrl={`${SITE_URL}/coin/${coin.id}`}
         jsonLd={structuredData}
         keywords={`${coin.name}, ${coin.symbol}, crypto price, ${coin.id} price, market cap`}
       />
@@ -153,6 +155,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       notFound: true,
     };
   }
+
+  // Same cache window as the home page, so repeat visits do not hit the CoinGecko rate limit
+  context.res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=59');
 
   return {
     props: {
