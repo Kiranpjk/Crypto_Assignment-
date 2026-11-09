@@ -6,6 +6,7 @@ import Seo from '../components/Seo';
 import CoinCard from '../components/CoinCard';
 import { getMarkets } from '../services/api';
 import { MarketCoin } from '../types/crypto';
+import { SITE_URL } from '../config';
 
 interface HomeProps {
   coins: MarketCoin[];
@@ -26,7 +27,7 @@ const Home: NextPage<HomeProps> = ({ coins, page }) => {
       "position": (page - 1) * 20 + index + 1,
       "item": {
         "@type": "FinancialProduct",
-        "url": `https://your-domain.com/coin/${coin.id}`,
+        "url": `${SITE_URL}/coin/${coin.id}`,
         "name": coin.name,
         "image": coin.image
       }
@@ -40,7 +41,7 @@ const Home: NextPage<HomeProps> = ({ coins, page }) => {
         description={desc}
         keywords="crypto prices, cryptocurrency, market cap, bitcoin, ethereum, altcoins"
         jsonLd={structuredData}
-        canonicalUrl={`https://your-domain.com/?page=${page}`}
+        canonicalUrl={`${SITE_URL}/?page=${page}`}
       />
       <div>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem', textAlign: 'center' }}>
@@ -50,11 +51,17 @@ const Home: NextPage<HomeProps> = ({ coins, page }) => {
           Explore the top cryptocurrencies by market capitalization. Get live prices, 24h trading volume, and market trends instantly.
         </p>
 
-        <section className="grid">
-          {coins.map((coin) => (
-            <CoinCard key={coin.id} coin={coin} />
-          ))}
-        </section>
+        {coins.length === 0 ? (
+          <p role="status" style={{ textAlign: 'center', color: 'var(--secondary-color)' }}>
+            Prices could not be loaded right now. Please try again in a minute.
+          </p>
+        ) : (
+          <section className="grid">
+            {coins.map((coin) => (
+              <CoinCard key={coin.id} coin={coin} />
+            ))}
+          </section>
+        )}
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '3rem', flexWrap: 'wrap' }}>
           {page > 1 && (

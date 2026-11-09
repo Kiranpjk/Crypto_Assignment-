@@ -2,7 +2,7 @@
 
 A server-side rendered (SSR) Next.js application designed to track real-time cryptocurrency prices, market caps, and trends in INR. This project demonstrates programmatic SEO by generating dynamic pages for thousands of cryptocurrencies with optimized metadata, JSON-LD schema, and OpenGraph tags.
 
-**Public repository:** https://github.com/Kiranpjk/Crypto_Assignment-
+**Live site:** https://crypto-assignment-nu.vercel.app
 
 ## 🚀 Features
 
@@ -43,8 +43,8 @@ This app uses `NEXT_PUBLIC_SITE_URL` to generate absolute URLs in SEO metadata.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/crypto-seo-tracker.git
-    cd crypto-seo-tracker
+    git clone https://github.com/Kiranpjk/Crypto_Assignment-.git
+    cd Crypto_Assignment-
     ```
 
 2.  **Install dependencies:**
