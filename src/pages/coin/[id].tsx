@@ -7,6 +7,7 @@ import Sparkline from '../../components/Sparkline';
 import { getCoinDetail } from '../../services/api';
 import { CoinDetail } from '../../types/crypto';
 import { SITE_URL } from '../../config';
+import { formatINR, formatPercent } from '../../utils/format';
 
 interface CoinPageProps {
   coin: CoinDetail | null;
@@ -25,7 +26,7 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
   }
 
   const title = `${coin.name} (${coin.symbol.toUpperCase()}) Price, Chart & Market Cap`;
-  const desc = `Live ${coin.name} price today: ₹${coin.market_data.current_price.inr.toLocaleString('en-IN')}. Discover complete data, market cap, trading volume and historical charts for ${coin.name}.`;
+  const desc = `Live ${coin.name} price today: ${formatINR(coin.market_data.current_price.inr)}. Discover complete data, market cap, trading volume and historical charts for ${coin.name}.`;
   
   const priceChangeColor = coin.market_data.price_change_percentage_24h > 0 ? '#4caf50' : '#f44336';
 
@@ -71,7 +72,7 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
                 <h1 style={{ margin: 0, fontSize: '2.5rem' }}>{coin.name} <span style={{ color: 'var(--secondary-color)', fontSize: '1.5rem' }}>{coin.symbol.toUpperCase()}</span></h1>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', marginTop: '0.5rem' }}>
                     <span style={{ fontSize: '2rem', fontWeight: 'bold' }}>
-                        ₹{coin.market_data.current_price.inr.toLocaleString('en-IN')}
+                        {formatINR(coin.market_data.current_price.inr)}
                     </span>
                     <span style={{ 
                         color: priceChangeColor, 
@@ -81,7 +82,7 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
                         padding: '0.2rem 0.6rem',
                         borderRadius: '4px'
                     }}>
-                        {coin.market_data.price_change_percentage_24h.toFixed(2)}%
+                        {formatPercent(coin.market_data.price_change_percentage_24h)}
                     </span>
                 </div>
             </div>
@@ -107,12 +108,12 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
         <div className="grid">
             <div className="card">
                 <h3>Market Cap</h3>
-                <p className="price">₹{coin.market_data.market_cap.inr.toLocaleString('en-IN')}</p>
+                <p className="price">{formatINR(coin.market_data.market_cap.inr)}</p>
                 <small style={{ color: 'var(--secondary-color)' }}>Rank #{coin.market_data.market_cap_rank}</small>
             </div>
             <div className="card">
                 <h3>24h Volume</h3>
-                <p className="price">₹{coin.market_data.total_volume.inr.toLocaleString('en-IN')}</p>
+                <p className="price">{formatINR(coin.market_data.total_volume.inr)}</p>
             </div>
             <div className="card">
                 <h3>Circulating Supply</h3>
@@ -120,7 +121,7 @@ const CoinPage: NextPage<CoinPageProps> = ({ coin }) => {
             </div>
              <div className="card">
                 <h3>All Time High</h3>
-                <p className="price">₹{coin.market_data.high_24h.inr.toLocaleString('en-IN')}</p>
+                <p className="price">{formatINR(coin.market_data.high_24h.inr)}</p>
                 {/* Note: high_24h is 24h high, ath is all time high. Using types. */}
             </div>
         </div>

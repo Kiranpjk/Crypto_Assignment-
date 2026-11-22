@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { MarketCoin } from '../types/crypto';
+import { formatINR, formatPercent } from '../utils/format';
 
 export default function CoinCard({ coin }: { coin: MarketCoin }) {
   const isPositive = (coin.price_change_percentage_24h || 0) > 0;
@@ -23,13 +24,13 @@ export default function CoinCard({ coin }: { coin: MarketCoin }) {
         </div>
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 'auto' }}>
-            <div className="price">₹{coin.current_price?.toLocaleString('en-IN') ?? 'N/A'}</div>
+            <div className="price">{formatINR(coin.current_price)}</div>
             <div className={isPositive ? 'change-positive' : 'change-negative'} style={{ fontWeight: 'bold' }}>
-            {isPositive ? '+' : ''}{coin.price_change_percentage_24h?.toFixed(2) ?? '0.00'}%
+            {formatPercent(coin.price_change_percentage_24h, true)}
             </div>
         </div>
         <div style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--secondary-color)' }}>
-            Mkt Cap: ₹{(coin.market_cap?.toLocaleString('en-IN') ?? 'N/A')}
+            Mkt Cap: {formatINR(coin.market_cap)}
         </div>
     </Link>
   );

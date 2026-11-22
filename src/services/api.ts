@@ -18,7 +18,7 @@ export const getMarkets = async (perPage = 20, page = 1): Promise<MarketCoin[]> 
 
 export const getCoinDetail = async (id: string): Promise<CoinDetail | null> => {
     try {
-        const res = await fetch(`${COINGECKO_API_URL}/coins/${id}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`);
+        const res = await fetch(`${COINGECKO_API_URL}/coins/${encodeURIComponent(id)}?localization=false&tickers=false&market_data=true&community_data=true&developer_data=false&sparkline=true`);
         if (!res.ok) {
             throw new Error(`Failed to fetch coin detail for ${id}`);
         }
