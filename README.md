@@ -107,6 +107,10 @@ docker run --rm -p 3000:3000 ghcr.io/kiranpjk/crypto-seo-tracker:latest
 - **Deployment**: Vercel's Git integration deploys the site; the workflow does not touch Vercel.
 - **Dependabot** opens weekly update PRs for npm packages, GitHub Actions and the Docker base image.
 
+## 🔒 Security
+
+Dependency audit (Nov 2026): `npm audit` went from 17 advisories (3 critical, 9 high) to 0. Fixed with `npm audit fix`, Next.js 16.1.6 → 16.4.6 (same major, with matching `eslint-config-next`) and Vitest 3 → 4 (dev only).
+
 ## 📂 Project Structure
 
 - `src/pages/`: Next.js pages (routes).
